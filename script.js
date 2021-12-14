@@ -1,17 +1,17 @@
 const dino = document.querySelector ('.dino');
 const background = document.querySelector('.background');
 let isJumping = false;
+let position = 0;
 
 function handleKeyUp(event) {
-    if (event.KeyUp === 32) {
+    if (event.keyCode === 32) {
         if (!isJumping) {
             jump();
         }
     }
-}
+}  
 
 function jump() {
-    let position = 0;
 
     isJumping = true;
 
@@ -19,14 +19,13 @@ function jump() {
         if (position >= 150) {
             clearInterval(upInterval);
 
-
             let downInterval = setInterval(() => {
                 if (position <= 0) {
                     clearInterval(downInterval);
                     isJumping = false;
                 } else {
-                position -= 20;
-                dino.style.bottom = position + 'px';
+                    position -= 20;
+                    dino.style.bottom = position + 'px';
                 }
             }, 20);
         } else {
@@ -51,7 +50,7 @@ function createCactus() {
         if (cactusPosition < -60 ) {
             clearInterval(leftInterval);
             background.removeChild(cactus);
-        } else if (cactusPosition > 0 && cactusPosition < 60) {
+        } else if (cactusPosition > 0 && cactusPosition < 60 && position <60) {
             clearInterval(leftInterval);
             document.body.innerHTML = '<h1 class="game-over"> Fim de Jogo</h1>';
         } else {
